@@ -1,16 +1,27 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
+// CORS setup - only one call
+app.use(cors({
+  origin: [
+    "https://mindmap-main-neqli1lq0-tm344556-gmailcoms-projects.vercel.app", // Vercel frontend
+    "http://localhost:5173" // local dev
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // Routes
-const nodesRoutes = require("./routes/nodes");
+import nodesRoutes from "./routes/nodes.js";
 app.use("/api/nodes", nodesRoutes);
 
 // MongoDB Connection

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from "react";
+fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, { ... })
 
 interface User {
   id: string;
@@ -24,6 +25,7 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const initialState: AuthState = {
   user: null,
